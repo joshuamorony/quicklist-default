@@ -1,0 +1,34 @@
+{
+  "name": "quicklist-signals",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^16.0.3",
+    "@angular/cdk": "^15.2.1",
+    "@angular/common": "^16.0.3",
+    "@angular/compiler": "^16.0.3",
+    "@angular/core": "^16.0.3",
+    "@angular/forms": "^16.0.3",
+    "@angular/platform-browser": "^16.0.3",
+    "@angular/platform-browser-dynamic": "^16.0.3",
+    "@angular/router": "^16.0.3",
+    "@state-adapt/angular": "^1.1.0",
+    "@state-adapt/core": "^1.1.0",
+    "@state-adapt/rxjs": "^1.1.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.13.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^16.0.3",
+    "@angular/cli": "~16.0.3",
+    "@angular/compiler-cli": "^16.0.3",
+    "typescript": "~4.9.4"
+  }
+}
