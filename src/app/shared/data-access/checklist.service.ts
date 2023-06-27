@@ -12,6 +12,7 @@ import {
 export interface ChecklistsState {
   checklists: Checklist[];
   loaded: boolean;
+  error: string | null;
 }
 
 @Injectable({
@@ -25,13 +26,15 @@ export class ChecklistService {
   private state = signal<ChecklistsState>({
     checklists: [],
     loaded: false,
+    error: null,
   });
 
   // selectors
   checklists = computed(() => this.state().checklists);
   loaded = computed(() => this.state().loaded);
+  error = computed(() => this.state().error);
 
-  // sources
+  // sources 
   private checklistsLoaded$ = this.storageService.loadChecklists();
   add$ = new Subject<AddChecklist>();
   edit$ = new Subject<EditChecklist>();
@@ -39,13 +42,15 @@ export class ChecklistService {
 
   constructor() {
     // reducers
-    this.checklistsLoaded$.pipe(takeUntilDestroyed()).subscribe((checklists) =>
+    this.checklistsLoaded$.pipe(takeUntilDestroyed()).subscribe({
+      next: (checklists) =>
       this.state.update((state) => ({
         ...state,
         checklists,
         loaded: true,
-      }))
-    );
+      })),
+      error: (err) => this.state.update((state) => ({...state, error: err}))
+    });
 
     this.add$.pipe(takeUntilDestroyed()).subscribe((checklist) =>
       this.state.update((state) => ({

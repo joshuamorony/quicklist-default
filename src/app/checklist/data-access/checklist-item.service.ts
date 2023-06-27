@@ -22,7 +22,7 @@ export class ChecklistItemService {
   private storageService = inject(StorageService);
 
   // state
-  state = signal<ChecklistItemsState>({
+  private state = signal<ChecklistItemsState>({
     checklistItems: [],
     loaded: false,
   });

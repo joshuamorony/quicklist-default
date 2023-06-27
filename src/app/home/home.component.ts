@@ -1,3 +1,4 @@
+import { CommonModule } from "@angular/common";
 import { Component, effect, inject, signal } from "@angular/core";
 import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { ChecklistService } from "../shared/data-access/checklist.service";
@@ -14,6 +15,9 @@ import { ChecklistListComponent } from "./ui/checklist-list.component";
     <button (click)="checklistBeingEdited.set({})">Add</button>
 
     <h2>Your checklists</h2>
+    
+    <p *ngIf="error()">{{ error() }}</p>
+
     <app-checklist-list
       [checklists]="checklists()"
       (delete)="cs.remove$.next($event)"
@@ -43,6 +47,7 @@ import { ChecklistListComponent } from "./ui/checklist-list.component";
     FormModalComponent,
     ReactiveFormsModule,
     ChecklistListComponent,
+    CommonModule
   ],
 })
 export default class HomeComponent {
@@ -50,6 +55,7 @@ export default class HomeComponent {
   fb = inject(FormBuilder);
 
   checklists = this.cs.checklists;
+  error = this.cs.error;
   checklistBeingEdited = signal<Partial<Checklist> | null>(null);
 
   checklistForm = this.fb.nonNullable.group({
