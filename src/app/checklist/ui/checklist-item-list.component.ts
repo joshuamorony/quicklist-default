@@ -12,6 +12,7 @@ import { ChecklistItem } from "../../shared/interfaces/checklist-item";
   imports: [CommonModule],
   selector: "app-checklist-item-list",
   template: `
+  <button *ngIf="hasCheckedItems()" (click)="reset()">Reset Checklist Items</button>
     <ul>
       <li *ngFor="let item of checklistItems; trackBy: trackByFn">
         <span *ngIf="item.checked">[DONE]</span>
@@ -33,6 +34,7 @@ export class ChecklistItemListComponent {
   @Output() toggle = new EventEmitter<string>();
   @Output() delete = new EventEmitter<string>();
   @Output() edit = new EventEmitter<ChecklistItem>();
+  @Output() resetChecklist = new EventEmitter<string>();
 
   toggleItem(itemId: string) {
     this.toggle.emit(itemId);
@@ -40,5 +42,16 @@ export class ChecklistItemListComponent {
 
   trackByFn(index: number, item: ChecklistItem) {
     return item.id;
+  }
+  hasCheckedItems() {
+    return this.checklistItems.some(item => item.checked);
+  }
+
+  getFirstCheckedItem(): ChecklistItem | undefined {
+    return this.checklistItems.find(item => item.checked);
+  }
+  reset() {
+    const cli = this.getFirstCheckedItem();
+    if(cli) this.resetChecklist.emit(cli.checklistId);
   }
 }

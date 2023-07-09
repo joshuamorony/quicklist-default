@@ -27,7 +27,7 @@ import { ChecklistListComponent } from "./ui/checklist-list.component";
     <app-modal [isOpen]="!!checklistBeingEdited()">
       <ng-template>
         <app-form-modal
-          title="test"
+          title="Add Checklist"
           [formGroup]="checklistForm"
           (close)="checklistBeingEdited.set(null)"
           (save)="
