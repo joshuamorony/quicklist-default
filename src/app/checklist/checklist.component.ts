@@ -26,7 +26,6 @@ import { ChecklistItemListComponent } from "./ui/checklist-item-list.component";
       *ngIf="checklist() as checklist"
       [checklist]="checklist"
       (addItem)="checklistItemBeingEdited.set({})"
-      (resetChecklist)="cis.reset$.next($event)"
     />
 
     <app-checklist-item-list
@@ -34,6 +33,8 @@ import { ChecklistItemListComponent } from "./ui/checklist-item-list.component";
       (toggle)="cis.toggle$.next($event)"
       (delete)="cis.remove$.next($event)"
       (edit)="checklistItemBeingEdited.set($event)"
+      (resetChecklist)="cis.reset$.next($event)"
+
     />
 
     <app-modal [isOpen]="!!checklistItemBeingEdited()">

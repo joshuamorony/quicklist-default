@@ -14,4 +14,9 @@ export const routes: Route[] = [
     redirectTo: "home",
     pathMatch: "full",
   },
+  {
+    path: "**",
+    redirectTo: "home",
+    pathMatch: "full",
+  }
 ];
